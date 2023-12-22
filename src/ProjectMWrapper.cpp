@@ -51,7 +51,7 @@ void ProjectMWrapper::initialize(Poco::Util::Application& app)
         // Playlist
         _playlist = projectm_playlist_create(_projectM);
 
-        projectm_playlist_set_shuffle(_playlist, _config->getBool("shuffleEnabled", true));
+        //projectm_playlist_set_shuffle(_playlist, _config->getBool("shuffleEnabled", true));
         if (!presetPath.empty())
         {
             projectm_playlist_add_path(_playlist, presetPath.c_str(), true, false);

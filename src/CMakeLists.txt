@@ -70,9 +70,23 @@ if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
     set(PROJECTM_PLAYLIST_DIR "${CMAKE_SOURCE_DIR}/libs/projectM4-playlist/iOS-arm64/Release-iphoneos")
     set(POCO_DIR "${CMAKE_SOURCE_DIR}/libs/Poco/iOS-arm64")
 
+    set(RESOURCE_FILES
+            "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/flagoscope/flagoscope3.milk"
+            "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/flagoscope/flagoscope4.milk"
+            "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/ondulloscope/amandioc-ondulloscope.milk"
+            "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/ondulloscope/amandioc-ondulloscope2.milk"
+            "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/ondulloscope/amandioc-ondulloscope2a.milk")
+
+    target_sources(projectMSDL PRIVATE ${RESOURCE_FILES})
+    set_source_files_properties(${RESOURCE_FILES} PROPERTIES
+            MACOSX_PACKAGE_LOCATION "Resources"
+    )
+    source_group("Resources" FILES ${RESOURCE_FILES})
+
     # Pretty insane there's no better way to do this...?
     # https://www.gbgames.com/2022/08/08/freshly-squeezed-progress-report-mac-port-automation-finished-and-60-fps-fest/
     set_target_properties(projectMSDL PROPERTIES
+            MACOSX_BUNDLE TRUE
             INSTALL_RPATH "@executable_path/Frameworks"
             XCODE_EMBED_FRAMEWORKS "${PROJECTM_DIR}/libprojectM-4.dylib;${PROJECTM_DIR}/libprojectM-4.4.dylib;${PROJECTM_DIR}/libprojectM-4.4.0.0.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.4.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.4.0.0.dylib;${POCO_DIR}/libPocoUtil.95.dylib;${POCO_DIR}/libPocoUtil.dylib;${POCO_DIR}/libPocoFoundation.95.dylib;${POCO_DIR}/libPocoFoundation.dylib;${POCO_DIR}/libPocoJSON.95.dylib;${POCO_DIR}/libPocoJSON.dylib;${POCO_DIR}/libPocoXML.95.dylib;${POCO_DIR}/libPocoXML.dylib"
             XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY FALSE
