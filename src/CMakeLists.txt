@@ -59,6 +59,7 @@ endif()
 
 target_link_libraries(projectMSDL
         PRIVATE
+        libprojectM::projectM
         libprojectM::playlist
         Poco::Util
         Poco::Foundation
