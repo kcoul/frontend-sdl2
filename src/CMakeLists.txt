@@ -46,14 +46,15 @@ target_compile_definitions(projectMSDL
         PROJECTMSDL_VERSION="${PROJECT_VERSION}"
         )
 
+target_include_directories(projectMSDL PUBLIC
+        "${CMAKE_SOURCE_DIR}/libs/SDL2/include"
+        "${CMAKE_SOURCE_DIR}/libs/Poco/Foundation/include"
+        "${CMAKE_SOURCE_DIR}/libs/Poco/Util/include"
+        "${CMAKE_SOURCE_DIR}/libs/projectM4/include"
+        "${CMAKE_SOURCE_DIR}/libs/projectM4-playlist/include"
+)
+
 if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
-    target_include_directories(projectMSDL PUBLIC
-            "${CMAKE_SOURCE_DIR}/libs/SDL2/include"
-            "${CMAKE_SOURCE_DIR}/libs/Poco/Foundation/include"
-            "${CMAKE_SOURCE_DIR}/libs/Poco/Util/include"
-            "${CMAKE_SOURCE_DIR}/libs/projectM4/include"
-            "${CMAKE_SOURCE_DIR}/libs/projectM4-playlist/include"
-    )
     set_xcode_property(projectMSDL PRODUCT_BUNDLE_IDENTIFIER "com.kcoul.projectM" All)
 
     set_target_properties(projectMSDL PROPERTIES
@@ -183,8 +184,8 @@ target_link_libraries(projectMSDL
         libprojectM::playlist
         Poco::Util
         Poco::Foundation
-        Poco::JSON
-        Poco::XML
+        #Poco::JSON
+        #Poco::XML
         SDL2::SDL2
         #SDL2::SDL2main #Shouldn't be necessary on iOS?
         )
@@ -202,6 +203,9 @@ if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
             -framework GameController
             -framework Metal
             -framework UIKit")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    target_link_libraries(projectMSDL
+            PRIVATE "-framework OpenGL")
 endif()
 
 if(MSVC)

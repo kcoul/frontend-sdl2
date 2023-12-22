@@ -4,6 +4,21 @@
 
 #include <SDL2/SDL_opengl.h>
 
+#if __APPLE__
+#include <TargetConditionals.h>
+#if TARGET_IPHONE_SIMULATOR
+#define USE_GLES 1
+#elif TARGET_OS_MACCATALYST
+// Mac's Catalyst (ports iOS API into Mac, like UIKit).
+#elif TARGET_OS_IPHONE
+#define USE_GLES 1
+#elif TARGET_OS_MAC
+// Other kinds of Apple platforms
+#else
+#   error "Unknown Apple platform"
+#endif
+#endif
+
 const char* SDLRenderingWindow::name() const
 {
     return "SDL2 Rendering Window";
@@ -218,9 +233,6 @@ void SDLRenderingWindow::CreateSDLWindow()
         poco_debug_f3(_logger, "Creating window on monitor %?d at X=%?d Y=%?d.", display, left, top);
     }
 
-//TODO: Wrap in TargetConditional check for iphone or iphone-simulator
-#define USE_GLES 1
-    
 #if USE_GLES
     // use GLES 3.0
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
