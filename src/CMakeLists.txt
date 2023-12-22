@@ -68,14 +68,86 @@ if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
 
     set(PROJECTM_DIR "${CMAKE_SOURCE_DIR}/libs/projectM4/iOS-arm64/Release-iphoneos")
     set(PROJECTM_PLAYLIST_DIR "${CMAKE_SOURCE_DIR}/libs/projectM4-playlist/iOS-arm64/Release-iphoneos")
+
+    set(PROJECTM_DIR "${CMAKE_SOURCE_DIR}/libs/projectM4/iOS-arm64/Debug-iphoneos")
+    set(PROJECTM_PLAYLIST_DIR "${CMAKE_SOURCE_DIR}/libs/projectM4-playlist/iOS-arm64/Debug-iphoneos")
+
     set(POCO_DIR "${CMAKE_SOURCE_DIR}/libs/Poco/iOS-arm64")
 
     set(RESOURCE_FILES
+            #Presets
             "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/flagoscope/flagoscope3.milk"
             "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/flagoscope/flagoscope4.milk"
             "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/ondulloscope/amandioc-ondulloscope.milk"
             "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/ondulloscope/amandioc-ondulloscope2.milk"
-            "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/ondulloscope/amandioc-ondulloscope2a.milk")
+            "${CMAKE_SOURCE_DIR}/resources/Presets/oscilloscope/ondulloscope/amandioc-ondulloscope2a.milk"
+            #Textures
+            "${CMAKE_SOURCE_DIR}/resources/Textures/bw3.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/cartunemask1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/cells.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/clouds.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/clouds2.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/colors.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/colors7.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/devboxb.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/eyeball.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/facade01.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_alpha.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_alpha3.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_alpha4.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_alpha5.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_alpha8.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_base.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_dis4.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/fire_dis5.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/grad.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/grad2.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/grad16.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/heart.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/Image415.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/lichen.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/manyfish.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/moss1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OctagonalRoach.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIbeans1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIcafewall.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIchess1..jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIcurved1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIcurved2.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OICurved3.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OICurved4.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIkametanjo.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIparallel1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/OIpoggendo.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/onefish.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/pano_earth.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/pano_earth_clouds.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/pano_earth_night.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/pano_earth_spec.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/pano_starsmap.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/paper.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/PEcubes1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/PEcubesBW.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/PElosang1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/PEpyramid1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/PEsticks1.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/PEsticks2.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/prayerwheel.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/ruin.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/seaweed.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/seaweed_ORIGINAL.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/sin_lookup.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/sinl.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/sky.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/smalltiled_colors3.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/smalltiled_electric_nebula.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/smalltiled_ensign_meat.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/smalltiled_lizard_scales.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/sunrise.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/videoalpha.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/VITRIOL.jpg"
+            "${CMAKE_SOURCE_DIR}/resources/Textures/wrenches.jpg"
+            )
 
     target_sources(projectMSDL PRIVATE ${RESOURCE_FILES})
     set_source_files_properties(${RESOURCE_FILES} PROPERTIES
@@ -88,7 +160,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
     set_target_properties(projectMSDL PROPERTIES
             MACOSX_BUNDLE TRUE
             INSTALL_RPATH "@executable_path/Frameworks"
-            XCODE_EMBED_FRAMEWORKS "${PROJECTM_DIR}/libprojectM-4.dylib;${PROJECTM_DIR}/libprojectM-4.4.dylib;${PROJECTM_DIR}/libprojectM-4.4.0.0.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.4.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.4.0.0.dylib;${POCO_DIR}/libPocoUtil.95.dylib;${POCO_DIR}/libPocoUtil.dylib;${POCO_DIR}/libPocoFoundation.95.dylib;${POCO_DIR}/libPocoFoundation.dylib;${POCO_DIR}/libPocoJSON.95.dylib;${POCO_DIR}/libPocoJSON.dylib;${POCO_DIR}/libPocoXML.95.dylib;${POCO_DIR}/libPocoXML.dylib"
+            #XCODE_EMBED_FRAMEWORKS "${PROJECTM_DIR}/libprojectM-4.dylib;${PROJECTM_DIR}/libprojectM-4.4.dylib;${PROJECTM_DIR}/libprojectM-4.4.0.0.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.4.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlist.4.0.0.dylib;${POCO_DIR}/libPocoUtil.95.dylib;${POCO_DIR}/libPocoUtil.dylib;${POCO_DIR}/libPocoFoundation.95.dylib;${POCO_DIR}/libPocoFoundation.dylib;${POCO_DIR}/libPocoJSON.95.dylib;${POCO_DIR}/libPocoJSON.dylib;${POCO_DIR}/libPocoXML.95.dylib;${POCO_DIR}/libPocoXML.dylib"
+            XCODE_EMBED_FRAMEWORKS "${PROJECTM_DIR}/libprojectM-4d.dylib;${PROJECTM_DIR}/libprojectM-4d.4.dylib;${PROJECTM_DIR}/libprojectM-4d.4.0.0.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlistd.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlistd.4.dylib;${PROJECTM_PLAYLIST_DIR}/libprojectM-4-playlistd.4.0.0.dylib;${POCO_DIR}/libPocoUtil.95.dylib;${POCO_DIR}/libPocoUtil.dylib;${POCO_DIR}/libPocoFoundation.95.dylib;${POCO_DIR}/libPocoFoundation.dylib;${POCO_DIR}/libPocoJSON.95.dylib;${POCO_DIR}/libPocoJSON.dylib;${POCO_DIR}/libPocoXML.95.dylib;${POCO_DIR}/libPocoXML.dylib"
             XCODE_EMBED_FRAMEWORKS_CODE_SIGN_ON_COPY FALSE
             XCODE_EMBED_FRAMEWORKS_REMOVE_HEADERS_ON_COPY FALSE)
 
