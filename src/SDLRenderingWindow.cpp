@@ -218,6 +218,9 @@ void SDLRenderingWindow::CreateSDLWindow()
         poco_debug_f3(_logger, "Creating window on monitor %?d at X=%?d Y=%?d.", display, left, top);
     }
 
+//TODO: Wrap in TargetConditional check for iphone or iphone-simulator
+#define USE_GLES 1
+    
 #if USE_GLES
     // use GLES 2.0
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
