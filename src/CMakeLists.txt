@@ -46,13 +46,30 @@ target_compile_definitions(projectMSDL
         PROJECTMSDL_VERSION="${PROJECT_VERSION}"
         )
 
+if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    target_include_directories(projectMSDL PUBLIC
+            "${CMAKE_SOURCE_DIR}/libs/SDL2/include"
+            "${CMAKE_SOURCE_DIR}/libs/Poco/Foundation/include"
+            "${CMAKE_SOURCE_DIR}/libs/Poco/Util/include"
+            "${CMAKE_SOURCE_DIR}/libs/projectM4/include"
+            "${CMAKE_SOURCE_DIR}/libs/projectM4-playlist/include"
+    )
+    set_xcode_property(projectMSDL PRODUCT_BUNDLE_IDENTIFIER "com.kcoul.projectM-SDL2" All)
+endif()
+
 target_link_libraries(projectMSDL
         PRIVATE
         libprojectM::playlist
-        Poco::Util
-        SDL2::SDL2$<$<STREQUAL:${SDL2_LINKAGE},static>:-static>
-        SDL2::SDL2main
+        Poco
+        SDL2::SDL2
+        #SDL2::SDL2main #Shouldn't be necessary on iOS?
         )
+
+if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
+    target_link_libraries(projectMSDL
+            PRIVATE
+            "-framework OpenGLES")
+endif()
 
 if(MSVC)
     set_target_properties(projectMSDL

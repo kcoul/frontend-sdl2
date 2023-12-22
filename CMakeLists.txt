@@ -29,7 +29,7 @@ find_package(SDL2 REQUIRED)
 find_package(Poco REQUIRED COMPONENTS Util)
 
 include(SDL2Target)
-include(dependencies_check.cmake)
+#include(dependencies_check.cmake) #custom iOS library builds don't seem to have their versions available
 
 add_subdirectory(src)
 
@@ -37,7 +37,7 @@ if(ENABLE_TESTING)
     add_subdirectory(test)
 endif()
 
-include(install.cmake)
+#include(install.cmake)
 include(packaging.cmake)
 
 message(STATUS "SDL version: ${SDL2_VERSION}")
