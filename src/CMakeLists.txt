@@ -54,7 +54,56 @@ if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
             "${CMAKE_SOURCE_DIR}/libs/projectM4/include"
             "${CMAKE_SOURCE_DIR}/libs/projectM4-playlist/include"
     )
-    set_xcode_property(projectMSDL PRODUCT_BUNDLE_IDENTIFIER "com.kcoul.projectM-SDL2" All)
+    set_xcode_property(projectMSDL PRODUCT_BUNDLE_IDENTIFIER "com.kcoul.projectM" All)
+
+    set_target_properties(projectMSDL PROPERTIES
+            MACOSX_BUNDLE_GUI_IDENTIFIER "com.kcoul.projectM"
+            MACOSX_BUNDLE_BUNDLE_VERSION "1.0.0"
+            MACOSX_BUNDLE_SHORT_VERSION_STRING "1.0.0"
+            MACOSX_BUNDLE_BUNDLE_NAME "projectM-SDL2")
+
+    set_target_properties(projectMSDL PROPERTIES
+            INSTALL_RPATH "@executable_path/Frameworks")
+
+    set_target_properties(projectMSDL PROPERTIES
+            XCODE_ATTRIBUTE_LD_RUNPATH_SEARCH_PATHS "@executable_path/Frameworks")
+
+    set(PROJECTM_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libs/projectM4/iOS-arm64/Release-iphoneos/")
+    list(APPEND projectm_libs
+            "${PROJECTM_DIR}/libprojectM-4.dylib"
+            "${PROJECTM_DIR}/libprojectM-4.4.dylib"
+            "${PROJECTM_DIR}/libprojectM-4.4.0.0.dylib"
+    )
+
+    set(PROJECTM_PLAYLIST_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libs/projectM4-playlist/iOS-arm64/Release-iphoneos/")
+    list(APPEND projectm_playlist_libs
+            "${PROJECTM_DIR}/libprojectM-4-playlist.dylib"
+            "${PROJECTM_DIR}/libprojectM-4-playlist.4.dylib"
+            "${PROJECTM_DIR}/libprojectM-4-playlist.4.0.0.dylib"
+    )
+
+    set(POCO_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libs/poco/iOS-arm64/")
+    list(APPEND poco_libs
+            "${POCO_UTIL_DIR}/libPocoUtil.95.dylib"
+            "${POCO_UTIL_DIR}/libPocoUtil.dylib"
+            "${POCO_FOUNDATION_DIR}/libPocoFoundation.95.dylib"
+            "${POCO_FOUNDATION_DIR}/libPocoFoundation.dylib"
+            "${POCO_FOUNDATION_DIR}/libPocoJSON.95.dylib"
+            "${POCO_FOUNDATION_DIR}/libPocoJSON.dylib"
+            "${POCO_FOUNDATION_DIR}/libPocoXML.95.dylib"
+            "${POCO_FOUNDATION_DIR}/libPocoXML.dylib"
+    )
+
+    # This sort of thing might not work for the Xcode generator?
+    #install(
+    #        FILES "${projectm_libs}"
+    #        DESTINATION "$<TARGET_BUNDLE_DIR_NAME:${target}>/Contents/Frameworks"
+    #)
+
+    #install(
+    #        FILES "${projectm_playlist_libs}"
+    #        DESTINATION "$<TARGET_BUNDLE_DIR_NAME:${target}>/Contents/Frameworks"
+    #)
 endif()
 
 target_link_libraries(projectMSDL
@@ -63,6 +112,8 @@ target_link_libraries(projectMSDL
         libprojectM::playlist
         Poco::Util
         Poco::Foundation
+        Poco::JSON
+        Poco::XML
         SDL2::SDL2
         #SDL2::SDL2main #Shouldn't be necessary on iOS?
         )
