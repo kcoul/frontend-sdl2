@@ -60,15 +60,24 @@ endif()
 target_link_libraries(projectMSDL
         PRIVATE
         libprojectM::playlist
-        Poco
+        Poco::Util
         SDL2::SDL2
         #SDL2::SDL2main #Shouldn't be necessary on iOS?
         )
 
 if (CMAKE_SYSTEM_NAME STREQUAL "iOS")
     target_link_libraries(projectMSDL
-            PRIVATE
-            "-framework OpenGLES")
+            PRIVATE "-framework OpenGLES
+            -framework AVFAudio
+            -framework AudioToolbox
+            -framework QuartzCore
+            -framework CoreGraphics
+            -framework CoreHaptics
+            -framework CoreMotion
+            -framework Foundation
+            -framework GameController
+            -framework Metal
+            -framework UIKit")
 endif()
 
 if(MSVC)
