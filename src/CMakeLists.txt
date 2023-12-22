@@ -61,6 +61,7 @@ target_link_libraries(projectMSDL
         PRIVATE
         libprojectM::playlist
         Poco::Util
+        Poco::Foundation
         SDL2::SDL2
         #SDL2::SDL2main #Shouldn't be necessary on iOS?
         )

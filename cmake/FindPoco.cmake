@@ -1,6 +1,13 @@
-add_library(Poco STATIC IMPORTED)
+add_library(Poco::Util SHARED IMPORTED)
 
-message("${CMAKE_CURRENT_SOURCE_DIR}/libs/poco/iOS-arm64/libPoco.a")
+message("${CMAKE_CURRENT_SOURCE_DIR}/libs/poco/iOS-arm64/libPocoUtil.dylib")
 
-set_property(TARGET Poco PROPERTY
-        IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/libs/poco/iOS-arm64/libPoco.a")
+set_property(TARGET Poco::Util PROPERTY
+        IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/libs/poco/iOS-arm64/libPocoUtil.dylib")
+
+add_library(Poco::Foundation SHARED IMPORTED)
+
+message("${CMAKE_CURRENT_SOURCE_DIR}/libs/poco/iOS-arm64/libPocoFoundation.dylib")
+
+set_property(TARGET Poco::Foundation PROPERTY
+        IMPORTED_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}/libs/poco/iOS-arm64/libPocoFoundation.dylib")
