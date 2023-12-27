@@ -70,6 +70,7 @@ else()
     # Author: Andreas Stahl andreas.stahl@tu-dresden.de
 
     set(Poco_HINTS
+            /opt/homebrew
             /usr/local
             C:/AppliedInformatics
             ${Poco_DIR}
@@ -236,12 +237,12 @@ else()
         endif()
     endif()
 
-    message(STATUS "Found Poco: ${Poco_LIBRARIES}")
+    message(STATUS "Found Poco: ${Poco_LIBRARIES}") #TODO: Unpack found dirs and put into IMPORTED_LOCATION below
 
     add_library(Poco::Util SHARED IMPORTED)
     add_library(Poco::Foundation SHARED IMPORTED)
     set_property(TARGET Poco::Util PROPERTY
-            IMPORTED_LOCATION "/usr/local/lib/libPocoUtil.dylib")
+            IMPORTED_LOCATION "/opt/homebrew/lib/libPocoUtil.dylib")
     set_property(TARGET Poco::Foundation PROPERTY
-            IMPORTED_LOCATION "/usr/local/lib/libPocoFoundation.dylib")
+            IMPORTED_LOCATION "/opt/homebrew/lib/libPocoFoundation.dylib")
 endif()
