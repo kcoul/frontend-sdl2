@@ -40,7 +40,7 @@ void ProjectMWrapper::initialize(Poco::Util::Application& app)
         projectm_set_hard_cut_enabled(_projectM, _config->getBool("hardCutsEnabled", false));
         projectm_set_hard_cut_duration(_projectM, _config->getInt("hardCutDuration", 20));
         projectm_set_hard_cut_sensitivity(_projectM, static_cast<float>(_config->getDouble("hardCutSensitivity", 1.0)));
-        projectm_set_beat_sensitivity(_projectM, static_cast<float>(_config->getDouble("beatSensitivity", 1.0)));
+        projectm_set_beat_sensitivity(_projectM, static_cast<float>(_config->getDouble("beatSensitivity", 100.0)));
 
         if (!texturePath.empty())
         {
@@ -93,9 +93,10 @@ int ProjectMWrapper::TargetFPS()
 
 void ProjectMWrapper::RenderFrame() const
 {
-    //TODO: Why are direct gl calls needed in the wrapper?
-    //glClearColor(0.0, 0.0, 0.0, 0.0);
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //TODO: (Ask upstream) Why are direct gl calls from SDL_opengl.h needed in the wrapper?
+    //TODO: If actually needed, may need to switch on TargetConditionals.h for GLES equivalents
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     projectm_opengl_render_frame(_projectM);
 }
