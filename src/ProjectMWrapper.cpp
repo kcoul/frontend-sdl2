@@ -24,8 +24,8 @@ void ProjectMWrapper::initialize(Poco::Util::Application& app)
 
         sdlWindow.GetDrawableSize(canvasWidth, canvasHeight);
 
-        auto presetPath = _config->getString("presetPath", app.config().getString("application.dir", ""));
-        auto texturePath = _config->getString("texturePath", app.config().getString("", ""));
+        presetPath = _config->getString("presetPath", app.config().getString("application.dir", ""));
+        texturePath = _config->getString("texturePath", app.config().getString("", ""));
 
         _projectM = projectm_create();
 
@@ -57,6 +57,8 @@ void ProjectMWrapper::initialize(Poco::Util::Application& app)
             projectm_playlist_add_path(_playlist, presetPath.c_str(), true, false);
             projectm_playlist_sort(_playlist, 0, projectm_playlist_size(_playlist), SORT_PREDICATE_FILENAME_ONLY, SORT_ORDER_ASCENDING);
         }
+        
+        projectm_set_preset_locked(_projectM, true);
     }
 }
 
@@ -95,8 +97,8 @@ void ProjectMWrapper::RenderFrame() const
 {
     //TODO: (Ask upstream) Why are direct gl calls from SDL_opengl.h needed in the wrapper?
     //TODO: If actually needed, may need to switch on TargetConditionals.h for GLES equivalents
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glClearColor(0.0, 0.0, 0.0, 0.0);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     projectm_opengl_render_frame(_projectM);
 }

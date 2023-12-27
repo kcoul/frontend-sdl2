@@ -44,7 +44,8 @@ public:
 
     void uninitialize() override;
 
-
+    std::string getPresetPath() { return presetPath; }
+    std::string getTexturePath() { return texturePath; }
 protected:
     Poco::AutoPtr<Poco::Util::AbstractConfiguration> _config; //!< View of the "projectM" configuration subkey.
 
@@ -52,4 +53,8 @@ protected:
     projectm_playlist_handle _playlist{nullptr}; //!< Pointer to the projectM playlist manager instance.
 
     Poco::Logger& _logger{Poco::Logger::get("SDLRenderingWindow")}; //!< The class logger.
+
+private:
+    std::string presetPath = "";
+    std::string texturePath = "";
 };

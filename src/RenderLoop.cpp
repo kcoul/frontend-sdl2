@@ -173,10 +173,16 @@ void RenderLoop::KeyEvent(const SDL_KeyboardEvent& event, bool down)
             break;
 
         case SDLK_n:
+            projectm_playlist_clear(_playlistHandle);
+            projectm_playlist_add_path(_playlistHandle, _projectMWrapper.getPresetPath().c_str(), true, false);
+            projectm_playlist_sort(_playlistHandle, 0, projectm_playlist_size(_playlistHandle), SORT_PREDICATE_FILENAME_ONLY, SORT_ORDER_ASCENDING);
             projectm_playlist_play_next(_playlistHandle, true);
             break;
 
         case SDLK_p:
+            projectm_playlist_clear(_playlistHandle);
+            projectm_playlist_add_path(_playlistHandle, _projectMWrapper.getPresetPath().c_str(), true, false);
+            projectm_playlist_sort(_playlistHandle, 0, projectm_playlist_size(_playlistHandle), SORT_PREDICATE_FILENAME_ONLY, SORT_ORDER_ASCENDING);
             projectm_playlist_play_previous(_playlistHandle, true);
             break;
 
